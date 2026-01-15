@@ -41,30 +41,9 @@ resource "aws_security_group" "web" {
   }
 }
 
-resource "aws_instance" "web" {
+resource "aws_instance" "web" 
   ami                    = data.aws_ami.amazon_linux.id
   instance_type          = var.instance_type
   subnet_id              = var.subnet_id
-  vpc_security_group_ids = "sg-0338580a8ea5c8d2e"
-  key_name               = var.key_name
-  user_data              = base64encode(file("${path.module}/user_data.sh"))
-
-  tags = {
-    Name = var.instance_name
-  }
-}
-
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-  owners      = ["137112412989"] # Amazon
-
-  filter {
-    name   = "name"
-    values = ["al2023-ami-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
+  vpc_security_group_ids = "sg-01f8c204d2db24b14"
+  key_name         
