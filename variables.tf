@@ -25,5 +25,5 @@ variable "key_name" {
 variable "subnet_id" {
   description = "Subnet ID where the instance will be created"
   type        = string
-  default     = "subnet-083a15cd26d3cb77c"
+  default     = "subnet-0d69a7a76e6b17f90"
 }
