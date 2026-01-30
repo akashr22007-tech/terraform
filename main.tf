@@ -60,7 +60,7 @@ resource "aws_security_group" "web" {
 resource "aws_instance" "web" {
   ami                    = data.aws_ami.amazon_linux.id
   instance_type          = "t2.micro"
-  subnet_id              = "subnet-0d69a7a76e6b17f90"
+  subnet_id              = "subnet-0d69a7a76e6b17f90subnet-0d69a7a76e6b17f90"
   vpc_security_group_ids = ["sg-02b85c8ea3900543a"]
   key_name               = "awskey"
   user_data              = file("${path.module}/user_data.sh")
