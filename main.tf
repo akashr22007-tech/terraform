@@ -61,7 +61,7 @@ resource "aws_instance" "web" {
   ami                    = data.aws_ami.amazon_linux.id
   instance_type          = "t2.micro"
   subnet_id              = "subnet-0d69a7a76e6b17f90"
-  vpc_security_group_ids ="sg-07b8e6b02da3caa3c"
+  vpc_security_group_ids = [aws_security_group.web.id]
   associate_public_ip_address = true
   key_name               = "awskey"
   user_data              = file("${path.module}/user_data.sh")
@@ -69,21 +69,7 @@ resource "aws_instance" "web" {
   tags = {
     Name = "web-server"
   }
-}
-
-
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = "ap-south-1"
-}
+}  
 
 resource "aws_s3_bucket_versioning" "versioning" {
   bucket = aws_s3_bucket.my_bucket.id
@@ -102,11 +88,11 @@ resource "aws_s3_bucket" "my_bucket" {
   }
 }
 
-esource "aws_s3_bucket_public_access_block" "block_public" {
+resource "aws_s3_bucket_public_access_block" "block_public" {
   bucket = aws_s3_bucket.my_bucket.id
 
   block_public_acls       = true
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
-}
+} 
